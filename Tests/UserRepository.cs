@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 
 namespace Tests
 {
@@ -20,6 +21,12 @@ namespace Tests
         {
             if (!users.TryAdd(userEntity.Login, userEntity))
                 throw new Exception($"User with login '{userEntity.Login}' is already created");
+        }
+
+        public void CreateAll(IEnumerable<UserEntity> users)
+        {
+            foreach (var user in users)
+                Create(user);
         }
     }
 }

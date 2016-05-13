@@ -91,6 +91,7 @@
     <Compile Include="UserEntityFactory.cs" />
     <Compile Include="UserModel.cs" />
     <Compile Include="UserRepository.cs" />
+    <Compile Include="Tests\UserRepository_Should.cs" />
     <Compile Include="UserService.cs" />
   </ItemGroup>
   <ItemGroup>

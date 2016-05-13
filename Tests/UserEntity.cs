@@ -4,9 +4,9 @@ namespace Tests
 {
     public class UserEntity
     {
-        public string Login { get; set; }
-        public Guid UserId { get; set; }
-        public string PasswordHash { get; set; }
+        public string Login { get; }
+        public Guid UserId { get; }
+        public string PasswordHash { get; }
 
         public UserEntity() : this(null, Guid.Empty, null)
         {

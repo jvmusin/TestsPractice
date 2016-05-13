@@ -5,12 +5,12 @@ using FluentAssertions;
 namespace Tests.Tests
 {
     [TestFixture]
-    public class PasswordHasher_Should
+    public class PasswordHasher_Should : TestBase
     {
         private PasswordHasher hasher;
 
         [SetUp]
-        public void SetUp()
+        public override void SetUp()
         {
             hasher = new PasswordHasher();
         }
