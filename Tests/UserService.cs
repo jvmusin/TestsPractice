@@ -20,10 +20,14 @@ namespace Tests
 
         public void Register(string login, string password)
         {
+            if (login == null)
+                throw new ArgumentNullException(nameof(login));
+            if (password == null)
+                throw new ArgumentNullException(nameof(password));
+
             var passwordHash = passwordHasher.Hash(password);
             var userId = guidFactory.Create();
             var userEntity = userEntityFactory.Create(login, userId, passwordHash);
-
             userRepository.Create(userEntity);
         }
 

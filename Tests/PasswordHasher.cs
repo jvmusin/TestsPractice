@@ -6,11 +6,12 @@ namespace Tests
     {
         public string Hash(string password)
         {
+            if (password == null)
+                throw new ArgumentNullException(nameof(password));
+
             var hash = new char[password.Length];
-            for (var i = 0; i < password.Length; ++i)
-            {
+            for (var i = 0; i < password.Length; i++)
                 hash[i] = (char)(password[i] + 5);
-            }
             return new string(hash);
         }
     }

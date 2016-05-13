@@ -1,21 +1,19 @@
-﻿using NUnit.Framework;
-using Rhino.Mocks;
+﻿using FakeItEasy;
+using NUnit.Framework;
 
 namespace Tests.Tests
 {
     public class TestBase
     {
-        protected MockRepository mockRepository;
-
         [SetUp]
         public virtual void SetUp()
         {
-            mockRepository = new MockRepository();
+
         }
 
-        protected T NewMock<T>()
+        protected T StrictMock<T>()
         {
-            return mockRepository.StrictMock<T>();
+            return A.Fake<T>(x => x.Strict());
         }
     }
 }
