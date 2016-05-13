@@ -34,10 +34,6 @@
       <HintPath>..\packages\FakeItEasy.1.25.3\lib\net40\FakeItEasy.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="FakeItEasy.AutoMocker, Version=1.13.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FakeItEasy.Automocker.1.13.0\lib\net40\FakeItEasy.AutoMocker.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="FluentAssertions, Version=4.6.0.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentAssertions.4.6.0\lib\net45\FluentAssertions.dll</HintPath>
       <Private>True</Private>
@@ -90,8 +86,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\PasswordHasher_Should.cs" />
     <Compile Include="Tests\TestBase.cs" />
-    <Compile Include="Tests\UserServiceTest.cs" />
-    <Compile Include="Tests\UserServiceUnitTest.cs" />
     <Compile Include="Tests\UserService_Should.cs" />
     <Compile Include="UserEntity.cs" />
     <Compile Include="UserEntityFactory.cs" />

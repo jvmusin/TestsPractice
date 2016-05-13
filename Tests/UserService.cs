@@ -20,10 +20,7 @@ namespace Tests
 
         public void Register(string login, string password)
         {
-            if (login == null)
-                throw new ArgumentNullException(nameof(login));
-            if (password == null)
-                throw new ArgumentNullException(nameof(password));
+            CheckForNull(login, password);
 
             var passwordHash = passwordHasher.Hash(password);
             var userId = guidFactory.Create();
@@ -33,20 +30,25 @@ namespace Tests
 
         public UserModel Login(string login, string password)
         {
+            CheckForNull(login, password);
+
             var entity = userRepository.Find(login);
 
             if (entity == null)
                 return null;
 
             var hash = passwordHasher.Hash(password);
-            if (hash != entity.PasswordHash)
-                return null;
+            return hash == entity.PasswordHash 
+                ? new UserModel(entity.Login, entity.UserId) 
+                : null;
+        }
 
-            return new UserModel
-            {
-                Login = entity.Login,
-                UserId = entity.UserId
-            };
+        private void CheckForNull(string login, string password)
+        {
+            if (login == null)
+                throw new ArgumentNullException(nameof(login));
+            if (password == null)
+                throw new ArgumentNullException(nameof(password));
         }
     }
 }

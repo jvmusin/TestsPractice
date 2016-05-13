@@ -5,7 +5,8 @@ namespace Tests
 {
     public class UserRepository : IUserRepository
     {
-        private readonly ConcurrentDictionary<string, UserEntity> users = new ConcurrentDictionary<string, UserEntity>();
+        private readonly ConcurrentDictionary<string, UserEntity> users 
+            = new ConcurrentDictionary<string, UserEntity>();
 
         public UserEntity Find(string login)
         {
@@ -18,9 +19,7 @@ namespace Tests
         public void Create(UserEntity userEntity)
         {
             if (!users.TryAdd(userEntity.Login, userEntity))
-            {
-                throw new Exception("Fck");
-            }
+                throw new Exception($"User with login '{userEntity.Login}' is already created");
         }
     }
 }
