@@ -29,7 +29,7 @@ namespace Tests
         }
 
         [Test]
-        public void FindCreatedUsersCorrectly_WhenQueriesAreInSequencedOrder()
+        public void FindUsersCorrectly_WhenQueriesAreInSequencedOrder()
         {
             var usersCount = 10 * 1000;
             var users = CreateUsers(usersCount).ToList();
@@ -41,7 +41,7 @@ namespace Tests
         }
 
         [Test]
-        public void FindCreatedUsersCorrectly_WhenQueriesAreInRandomOrder()
+        public void FindUsersCorrectly_WhenQueriesAreInRandomOrder()
         {
             var usersCount = 10 * 1000;
             var users = CreateUsers(usersCount).ToList();
@@ -53,7 +53,7 @@ namespace Tests
         }
 
         [Test]
-        public void FindCreatedUserCorrectly_WhenRequestedTwoTimes()
+        public void FindUserCorrectly_WhenRequestedTwoTimes()
         {
             var user = new UserEntity("login", Guid.NewGuid(), "hash");
             userRepository.Create(user);
