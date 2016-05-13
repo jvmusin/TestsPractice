@@ -66,10 +66,10 @@ namespace Tests
         public void Fail_WhenUserAlreadyExists()
         {
             var user = new UserEntity("login", Guid.NewGuid(), "hash");
-            Action registering = () => userRepository.Create(user);
+            Action registration = () => userRepository.Create(user);
             
-            registering.ShouldNotThrow();
-            registering.ShouldThrow<Exception>();
+            registration.ShouldNotThrow();
+            registration.ShouldThrow<Exception>();
         }
 
         private static IEnumerable<UserEntity> CreateUsers(int count)
