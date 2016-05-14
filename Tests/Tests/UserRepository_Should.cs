@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using NUnit.Framework;
-using Tests.Tests;
 
-namespace Tests
+namespace Tests.Tests
 {
     [TestFixture]
     public class UserRepository_Should : TestBase
@@ -23,7 +22,7 @@ namespace Tests
         [Test]
         public void CreateUsersWithoutExceptions_WhenCreatingFirstTime()
         {
-            var usersCount = 10 * 1000;
+            var usersCount = 100;
             foreach (var user in CreateUsers(usersCount))
                 Assert.DoesNotThrow(() => userRepository.Create(user));
         }
@@ -31,7 +30,7 @@ namespace Tests
         [Test]
         public void FindUsersCorrectly_WhenQueriesAreInSequencedOrder()
         {
-            var usersCount = 10 * 1000;
+            var usersCount = 100;
             var users = CreateUsers(usersCount).ToList();
 
             userRepository.CreateAll(users);
@@ -43,7 +42,7 @@ namespace Tests
         [Test]
         public void FindUsersCorrectly_WhenQueriesAreInRandomOrder()
         {
-            var usersCount = 10 * 1000;
+            var usersCount = 100;
             var users = CreateUsers(usersCount).ToList();
 
             userRepository.CreateAll(users);
@@ -66,10 +65,10 @@ namespace Tests
         public void Fail_WhenUserAlreadyExists()
         {
             var user = new UserEntity("login", Guid.NewGuid(), "hash");
-            Action registration = () => userRepository.Create(user);
+            Action register = () => userRepository.Create(user);
             
-            registration.ShouldNotThrow();
-            registration.ShouldThrow<Exception>();
+            register.ShouldNotThrow();
+            register.ShouldThrow<Exception>();
         }
 
         private static IEnumerable<UserEntity> CreateUsers(int count)
