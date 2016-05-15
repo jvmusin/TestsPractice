@@ -10,14 +10,14 @@ namespace Tests
     [TestFixture]
     public class UserRepository_Should : TestBase
     {
-        private UserRepository userRepository;
+        private UserRepository repository;
 
         [SetUp]
         public override void SetUp()
         {
             base.SetUp();
 
-            userRepository = new UserRepository();
+            repository = new UserRepository();
         }
 
         [Test]
@@ -25,7 +25,7 @@ namespace Tests
         {
             var usersCount = 10 * 1000;
             foreach (var user in CreateUsers(usersCount))
-                Assert.DoesNotThrow(() => userRepository.Create(user));
+                Assert.DoesNotThrow(() => repository.Create(user));
         }
 
         [Test]
@@ -34,10 +34,10 @@ namespace Tests
             var usersCount = 10 * 1000;
             var users = CreateUsers(usersCount).ToList();
 
-            userRepository.CreateAll(users);
+            repository.CreateAll(users);
             
             foreach (var user in users)
-                userRepository.Find(user.Login).ShouldBeEquivalentTo(user);
+                repository.Find(user.Login).ShouldBeEquivalentTo(user);
         }
 
         [Test]
@@ -46,27 +46,27 @@ namespace Tests
             var usersCount = 10 * 1000;
             var users = CreateUsers(usersCount).ToList();
 
-            userRepository.CreateAll(users);
+            repository.CreateAll(users);
             
             foreach (var user in users.OrderBy(user => Rnd.Next()))
-                userRepository.Find(user.Login).ShouldBeEquivalentTo(user);
+                repository.Find(user.Login).ShouldBeEquivalentTo(user);
         }
 
         [Test]
         public void FindUserCorrectly_WhenRequestedTwoTimes()
         {
             var user = new UserEntity("login", Guid.NewGuid(), "hash");
-            userRepository.Create(user);
+            repository.Create(user);
 
-            userRepository.Find(user.Login);
-            userRepository.Find(user.Login).ShouldBeEquivalentTo(user);
+            repository.Find(user.Login);
+            repository.Find(user.Login).ShouldBeEquivalentTo(user);
         }
 
         [Test]
         public void Fail_WhenUserAlreadyExists()
         {
             var user = new UserEntity("login", Guid.NewGuid(), "hash");
-            Action registration = () => userRepository.Create(user);
+            Action registration = () => repository.Create(user);
             
             registration.ShouldNotThrow();
             registration.ShouldThrow<Exception>();
