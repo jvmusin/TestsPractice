@@ -12,6 +12,8 @@ namespace Tests.Tests
         [SetUp]
         public override void SetUp()
         {
+            base.SetUp();
+
             hasher = new PasswordHasher();
         }
 
