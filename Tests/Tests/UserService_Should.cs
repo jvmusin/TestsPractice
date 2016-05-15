@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.CompilerServices;
 using FakeItEasy;
 using FluentAssertions;
 using NUnit.Framework;
@@ -87,28 +90,28 @@ namespace Tests.Tests
 
         #region Null checks
 
-        [Test, Pairwise]
-        public void FailOnRegister_WhenLoginOrPasswordIsNull(
-            [Values("login",    null)] string login,
-            [Values("password", null)] string password)
+        [Test, TestCaseSource(nameof(NullLoginAndPasswordVariants))]
+        public void FailOnRegister_WhenLoginOrPasswordIsNull(string login, string password)
         {
-            if (login != null && password != null)
-                return;
-
             Action register = () => userService.Register(login, password);
             register.ShouldThrow<Exception>();
         }
 
-        [Test, Pairwise]
-        public void FailOnLogin_WhenLoginOrPasswordIsNull(
-            [Values("login",    null)] string login,
-            [Values("password", null)] string password)
+        [Test, TestCaseSource(nameof(NullLoginAndPasswordVariants))]
+        public void FailOnLogin_WhenLoginOrPasswordIsNull(string login, string password)
         {
-            if (login != null && password != null)
-                return;
+            Action loginAct = () => userService.Login(login, password);
+            loginAct.ShouldThrow<Exception>();
+        }
 
-            Action register = () => userService.Login(login, password);
-            register.ShouldThrow<Exception>();
+        private static IEnumerable<TestCaseData> NullLoginAndPasswordVariants
+        {
+            get
+            {
+                yield return new TestCaseData("login", null);
+                yield return new TestCaseData(null, "password");
+                yield return new TestCaseData(null, null);
+            }
         }
 
         #endregion
