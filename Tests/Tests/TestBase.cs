@@ -1,16 +1,15 @@
 ﻿using System;
 using FakeItEasy;
-using NUnit.Framework;
 
 namespace Tests.Tests
 {
-    public class TestBase
+    public abstract class TestBase
     {
-        protected readonly Random Rnd = new Random();
-
-        [SetUp]
+        protected Random Rnd;
+        
         public virtual void SetUp()
         {
+            Rnd = new Random();
         }
 
         protected T StrictMock<T>()
