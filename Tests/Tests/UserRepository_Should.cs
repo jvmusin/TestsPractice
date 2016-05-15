@@ -65,7 +65,7 @@ namespace Tests.Tests
         public void Fail_WhenUserAlreadyExists()
         {
             var user = new UserEntity("login", Guid.NewGuid(), "hash");
-            Action register = () => userRepository.Create(user);
+            Action register = () => repository.Create(user);
             
             register.ShouldNotThrow();
             register.ShouldThrow<Exception>();
