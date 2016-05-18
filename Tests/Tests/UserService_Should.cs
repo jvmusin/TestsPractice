@@ -27,7 +27,7 @@ namespace Tests.Tests
         }
 
         [Test]
-        public void RegisterCorrectly_WhenDataIsCorrect()
+        public void RegisterUserCorrectly_WhenDataIsCorrect()
         {
             var login = "login";
             var password = "pass";
@@ -107,8 +107,8 @@ namespace Tests.Tests
             if (login != null && password != null)
                 return;
 
-            Action register = () => userService.Login(login, password);
-            register.ShouldThrow<Exception>();
+            Action loginAct = () => userService.Login(login, password);
+            loginAct.ShouldThrow<Exception>();
         }
 
         #endregion
